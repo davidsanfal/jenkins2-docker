@@ -1,0 +1,19 @@
+version: '2'
+services:
+  jenkins2:
+    build: ./dockerfiles/master/jenkins2
+    ports:
+     - "8080:8080"
+     - "50000:50000"
+    volumes_from:
+     - jenkins2-data
+    depends_on:
+     - jenkins2-data
+    links:
+    - python_ci
+  jenkins2-data:
+    build: ./dockerfiles/master/data
+  python_ci:
+   build: ./dockerfiles/slaves/python
+   ports:
+    - 22
