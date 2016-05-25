@@ -1,19 +1,16 @@
 version: '2'
 services:
   jenkins2:
-    build: ./dockerfiles/master/jenkins2
+    image: jenkinsci/jenkins:latest
     ports:
      - "8080:8080"
      - "50000:50000"
     volumes_from:
-     - jenkins2-data
+     - databox
     depends_on:
-     - jenkins2-data
-    links:
-    - python_ci
-  jenkins2-data:
-    build: ./dockerfiles/master/data
-  python_ci:
-   build: ./dockerfiles/slaves/python
-   ports:
-    - 22
+     - databox
+  databox:
+    image: busybox
+    volumes:
+      - ./log:/var/log/jenkins
+      - ./jenkins_home:/var/jenkins_home

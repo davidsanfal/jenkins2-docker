@@ -1,1 +1,1 @@
-FROM python:2.7.11
+FROM ubuntu:trusty
